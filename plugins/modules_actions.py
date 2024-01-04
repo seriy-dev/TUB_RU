@@ -27,14 +27,14 @@ async def lmodule(client, message):
 
         await message.edit(f"{info[0].replace('.py', '')} успешно установлен!")
         await message.reply("<b>Перезагружаю юзербота...</b>")
-        await restart(message=message.chat.id)
+        await restart(message=message)
 
     else:
 
         await client.download_media(message.reply_to_message.document, file_name='plugins/')
         await message.edit("Модуль успешно установлен!")
         await message.reply("<b>Перезагружаю юзербота...</b>")
-        await restart(message=message.chat.id)
+        await restart(message=message)
 
 
 add_module("load_module", __file__)
