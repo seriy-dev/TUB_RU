@@ -19,7 +19,7 @@ async def change_prefix(client, message):
         f"Новый префикс: [{message.text.split()[1]}]"
     )
     await message.reply("<b>Перезагружаю юзербота...</b>")
-    await restart(message=message.chat.id)
+    await restart(message=message)
 
 add_module("changeprefix", __file__)
 add_command("cp", f"{prefix}changeprefix [префикс]", "меняет префикс")
