@@ -21,7 +21,7 @@ async def lmodule(client, message):
             await message.edit("Файл с названием как у этого модуля уже существует!")
             return
 
-        f = open(f"plugins/{info[0]}.py", "w+")
+        f = open(f"plugins/{info[0]}", "w+")
         f.write(info[1])
         f.close()
 
