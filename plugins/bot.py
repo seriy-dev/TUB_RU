@@ -16,7 +16,7 @@ async def bot(client, message):
         android_version_process = subprocess.run(['getprop', 'ro.build.version.release'], capture_output=True,
                                                  text=True)
         android_version = android_version_process.stdout.strip()
-        system = f"Termux [{android_version}]"
+        system = f"Termux [Android {android_version}]"
     else:
         system = platform.system()
     me = await client.get_me()
