@@ -29,8 +29,8 @@ async def bot(client, message):
 ❗ | Префикс: {prefix}
 🤖 | Версия юзербота: {version}
 🐍 | Python: {python_version()}
-🥧 | Pyrogram: {__version__}</b>
-👑 | создатель юзербота: @fimkov
+🥧 | Pyrogram: {__version__}
+👑 | создатель юзербота: @fimkov</b>
     """)
         await message.delete()
     except:
