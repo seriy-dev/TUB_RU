@@ -30,7 +30,7 @@ async def bot(client, message):
 🤖 | Версия юзербота: {version}
 🐍 | Python: {python_version()}
 🥧 | Pyrogram: {__version__}
-👑 | создатель юзербота: @fimkov</b>
+👑 | Создатель юзербота: @fimkov</b>
     """)
         await message.delete()
     except:
@@ -42,8 +42,8 @@ async def bot(client, message):
 ❗ | Префикс: {prefix}
 🤖 | Версия юзербота: {version}
 🐍 | Python: {python_version()}
-🥧 | Pyrogram: {__version__}</b>
-👑 | создатель юзербота: @dev_fimkov
+🥧 | Pyrogram: {__version__}
+👑 | Создатель юзербота: @fimkov</b>
     """)
 
 add_module("userbot_info", __file__)
