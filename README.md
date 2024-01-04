@@ -2,6 +2,9 @@
 
 Установка через termux: <pre language="bash">pkg install git && git clone https://github.com/Timka4959000/TimkaUserBot.git && cd TimkaUserBot && sh termux_setup.sh</pre>
 Последующие запуски через termux: <pre language="bash">cd TimkaUserBot && sh termux_start.sh</pre>
+
+Актуальная версия Termux: https://github.com/termux/termux-app/releases
+
 Windows: 
 1. Установите зип файл юзербота
 2. Распакуйте в любую папку
