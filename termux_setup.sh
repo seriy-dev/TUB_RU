@@ -1,7 +1,6 @@
 echo TimkaUserBot setup
 pkg install fish
 apt-get update && apt-get upgrade -y
-apt-get install git -y
 pkg install python
 pkg install wget
 apt install curl
