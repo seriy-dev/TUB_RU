@@ -80,7 +80,7 @@ def update_userbot():
     else:
         plugins_files = [
             "bot.py", "change_prefix.py", "help.py", "modules_actions.py",
-            "ping.py", "restart.py", "send_log.py", "~_###_zzz_logo.py"
+            "ping.py", "restart.py", "send_log.py", "logo.py"
         ]
 
         for plugin in tqdm(plugins_files, desc="Update plugins..."):
