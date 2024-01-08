@@ -1,5 +1,4 @@
 import os
-
 import requests
 
 modules = {}
@@ -48,4 +47,7 @@ def load_module(link):
 
 
 def upload_module(module_name: str):
-    return "Coming soon..."
+    if module_name in modules:
+        return modules[module_name]
+    else:
+        return "Module not found"
