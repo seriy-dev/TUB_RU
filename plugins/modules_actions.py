@@ -1,43 +1,121 @@
 from pyrogram import Client, filters
-from helps.modules import add_module, add_command, load_module, modules
+from helps.modules import add_module, add_command, load_module, commands, upload_module
 import os
-
 from helps.get_prefix import get_prefix
 from helps.scripts import restart
+from helps.scripts import get_lang
 
 prefix = get_prefix()
+lang = get_lang()
+
+class Texts_load:
+    @staticmethod
+    def get_texts():
+        return {"error": {
+            "ru": f"Помощь: {prefix}help modules",
+            "en": f"Help: {prefix}help modules"
+        },
+            "error 2": {
+                "ru": "Файл с названием как у этого модуля уже существует!",
+                "en": "A file with the name of this module already exists!"
+            },
+            "successfully": {
+                "ru": " успешно установлен",
+                "en": " successfully installed"
+            },
+            "reload": {
+                "ru": "<b>Перезагружаю юзербота...</b>",
+                "en": "<b>Rebooting the user bot...</b>"
+            }
+        }
+
+class Texts_upload:
+    @staticmethod
+    def get_texts():
+        return {"error": {
+            "ru": f"Помощь: {prefix}help modules",
+            "en": f"Help: {prefix}help modules"
+        },
+            "notfound": {
+                "ru": "Модуль не найден",
+                "en": "Module not found"
+            },
+            "successfully": {
+                "ru": " успешно установлен",
+                "en": " successfully installed"
+            },
+            "reload": {
+                "ru": "<b>Перезагружаю юзербота...</b>",
+                "en": "<b>Rebooting the user bot...</b>"
+            }
+        }
 
 
 @Client.on_message(filters.command(["lmodule", "load_module", "lm"], prefix) & filters.me)
 async def lmodule(client, message):
+    text_versions = Texts_load.get_texts()
     if not message.reply_to_message:
         try:
             link = message.command[1]
         except:
-            await message.edit(f"Помощь: {prefix}help load_module")
+            await message.edit(text_versions['error'][lang])
             return
+
         info = load_module(link)
+
         if os.path.isfile(f"plugins/{info[0]}"):
-            await message.edit("Файл с названием как у этого модуля уже существует!")
+            await message.edit(text_versions['error 2'][lang])
             return
 
         f = open(f"plugins/{info[0]}", "w+")
         f.write(info[1])
         f.close()
 
-        await message.edit(f"{info[0].replace('.py', '')} успешно установлен!")
-        await message.reply("<b>Перезагружаю юзербота...</b>")
+        await message.edit(info[0].replace('.py', '') + text_versions['successfully'][lang])
+        await message.reply(text_versions["reload"][lang])
         await restart(message=message)
-
     else:
-
         await client.download_media(message.reply_to_message.document, file_name='plugins/')
-        await message.edit("Модуль успешно установлен!")
-        await message.reply("<b>Перезагружаю юзербота...</b>")
+        await message.edit("Модуль" + text_versions['successfully'][lang])
+        await message.reply(text_versions["reload"][lang])
         await restart(message=message)
 
+@Client.on_message(filters.command(["umodule", "upload_module", "um"], prefix) & filters.me)
+async def uplmodule(client, message):
+    try:
+        name = message.command[1]
+    except IndexError:
+        text_versions = Texts_upload.get_texts()
+        await message.edit(text_versions['error'][lang])
+        return
 
-add_module("load_module", __file__)
-add_command("load_module", f"{prefix}load_module [raw ссылка/в ответ на файл с модулем]", "устанавливает модуль")
-add_command("lmodule", f"{prefix}load_module [raw ссылка/в ответ на файл с модулем]", "устанавливает модуль")
-add_command("lm", f"{prefix}load_module [raw ссылка/в ответ на файл с модулем]", "устанавливает модуль")
+    filename = upload_module(name)
+    if filename == "Module not found":
+        text_versions = Texts_upload.get_texts()
+        await message.edit(text_versions['notfound'][lang])
+
+    module_commands = commands[name]
+    result = ""
+    for command_name, help_command in module_commands.items():
+        result = result + f"<code>{command_name}</code> - <i>{help_command}</i>\n"
+
+    await client.send_document(message.chat.id, document=open(filename, "rb"), file_name=name + ".py",
+                               caption=f"<b>{name}</b>\n\n{result}")
+    await message.delete()
+
+if lang == "ru":
+    add_module("modules", __file__)
+    add_command("modules", f"{prefix}load_module [raw ссылка/в ответ на файл с модулем]", "устанавливает модуль")
+    add_command("modules", f"{prefix}lmodule [raw ссылка/в ответ на файл с модулем]", "устанавливает модуль")
+    add_command("modules", f"{prefix}lm [raw ссылка/в ответ на файл с модулем]", "устанавливает модуль")
+    add_command("modules", f"{prefix}upload_module [имя модуля]", "Отправляет файл модуля в чат")
+    add_command("modules", f"{prefix}umodule [имя модуля]", "Отправляет файл модуля в чат")
+    add_command("modules", f"{prefix}um [имя модуля]", "Отправляет файл модуля в чат")
+else:
+    add_module("modules", __file__)
+    add_command("modules", f"{prefix}load_module [raw link/in response to module file]", "installs a module")
+    add_command("modules", f"{prefix}lmodule [raw link/in response to module file]", "installs a module")
+    add_command("modules", f"{prefix}lm [raw link/in response to module file]", "installs a module")
+    add_command("modules", f"{prefix}upload_module [module name]", "sends module file to chat")
+    add_command("modules", f"{prefix}umodule [module name]", "sends module file to chat")
+    add_command("modules", f"{prefix}um [module name]", "sends module file to chat")
