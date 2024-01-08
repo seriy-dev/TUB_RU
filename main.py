@@ -99,7 +99,7 @@ def update_userbot():
 
         for file in tqdm(system_files, desc="Update system..."):
             new_code = requests.get(f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/{file}").text
-            new_code = new_code.replace('\r\n', '\n')  # Исправляем переносы строк
+            new_code = new_code.replace('\r\n', '\n') 
 
             with open(file, "w", encoding="utf-8") as old_file:
                 old_file.write(new_code)
@@ -115,6 +115,7 @@ def logging_setup():
 
 
 def login_client():
+    cc()
     from pyrogram import Client, idle
     from pyrogram.enums import ParseMode
     from helps.scripts import get_lang
@@ -136,8 +137,8 @@ def login_client():
                 write_lang.write(lang_code)
                 write_lang.close()
                 break
-        if not lang_code:
-            lang_code = get_lang()
+    else:
+        lang_code = get_lang()
 
     if not os.path.isfile("TimkaUserBot.session"):
         if lang_code == 'ru':
