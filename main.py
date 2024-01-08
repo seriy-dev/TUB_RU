@@ -68,8 +68,10 @@ def update_userbot():
     import requests
     from tqdm import tqdm
     import time
+    import info
 
     print("Поиск обновлений...")
+
     ver = requests.get("https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/info.py").text
     ver = ver.split('version = "')[1].split('"')[0]
 
@@ -86,14 +88,11 @@ def update_userbot():
             new_code = requests.get(
                 f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/plugins/{plugin}"
             ).text
+            new_code = new_code.replace('\r\n', '\n')
             plugin_path = f"plugins/{plugin}"
 
-            with open(plugin_path, "r", encoding="utf-8") as file:
-                old_code = file.read()
-
-            if old_code != new_code:
-                with open(plugin_path, "w", encoding="utf-8") as file:
-                    file.write(new_code)
+            with open(plugin_path, "w", encoding="utf-8") as file:
+                file.write(new_code)
 
         system_files = [
             "main.py", "info.py", "helps/get_prefix.py", "helps/modules.py", "helps/scripts.py"
@@ -101,13 +100,10 @@ def update_userbot():
 
         for file in tqdm(system_files, desc="Update system..."):
             new_code = requests.get(f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/{file}").text
+            new_code = new_code.replace('\r\n', '\n')
 
-            with open(file, "r", encoding="utf-8") as old_file:
-                old_code = old_file.read()
-
-            if old_code != new_code:
-                with open(file, "w", encoding="utf-8") as old_file:
-                    old_file.write(new_code)
+            with open(file, "w", encoding="utf-8") as old_file:
+                old_file.write(new_code)
 
         print("Обновление успешно!")
         time.sleep(3)
