@@ -69,7 +69,7 @@ def update_userbot():
     from tqdm import tqdm
     import time
     import info
-
+    
     print("Поиск обновлений...")
 
     ver = requests.get("https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/info.py").text
@@ -100,7 +100,7 @@ def update_userbot():
 
         for file in tqdm(system_files, desc="Update system..."):
             new_code = requests.get(f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/{file}").text
-            new_code = new_code.replace('\r\n', '\n')
+            new_code = new_code.replace('\r\n', '\n')  # Исправляем переносы строк
 
             with open(file, "w", encoding="utf-8") as old_file:
                 old_file.write(new_code)
