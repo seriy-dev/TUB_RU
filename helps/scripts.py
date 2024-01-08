@@ -1,18 +1,26 @@
 import nekobin
-from main import c, conn, cc
+from main import c, conn
 import logging, sys, os
-from nekobin import NekoBin, errors
-from pyrogram import Client
 
 
-async def restart(message):
+async def restart(message=None):
     f = open("restart.txt", "w")
-    if message.chat.username:
-        f.write(str(message.chat.username))
+    if message:
+        if message.chat.username:
+            f.write(str(message.chat.username))
+        else:
+            f.write(str(message.chat.id))
     else:
-        f.write(str(message))
+        f.write("me")
     f.close()
     os.execvp(sys.executable, [sys.executable, *sys.argv])
+
+
+def get_lang():
+    lang_get = open("lang.txt", "r")
+    lang = lang_get.read()
+    lang_get.close()
+    return lang
 
 
 async def get_keys(keys_to_search: list) -> list:
@@ -37,17 +45,3 @@ async def set_key(key_to_search: str, new_key: str):
         except Exception as e:
             logging.error(e)
     conn.commit()
-
-
-async def neko(text: str):
-    try:
-        neko = await nekobin.nekofy(
-            content=text,
-            title="code",
-            author="TimkaUserBot"
-        )
-    except errors.HostDownError:
-        return "Host is down at the moment!"
-    except:
-        return "Pasting failed!"
-    return neko.url
