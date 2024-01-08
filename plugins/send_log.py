@@ -28,6 +28,7 @@ async def send_log(client, message):
             chat_id=message.chat.id,
             document=open("log.log", "rb"),
             caption=text_versions["logs"][lang]
+        )
         await message.delete()
     except:
         await message.edit(text_versions['error'][lang])
