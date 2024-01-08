@@ -67,39 +67,50 @@ def update_userbot():
     from helps.scripts import restart
     import requests
     from tqdm import tqdm
+    import time
+
     print("Поиск обновлений...")
-    ver = requests.get("https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/info.py")
-    ver = ver.text.replace('version = "', "").replace('"', "")
+    ver = requests.get("https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/info.py").text
+    ver = ver.split('version = "')[1].split('"')[0]
+
     if ver == info.version:
         print("Обновления не найдены")
         return
     else:
-        plugins_files = ["bot.py", "change_prefix.py", "help.py", "modules_actions.py", "ping.py", "restart.py",
-                         "send_log.py", "~_###_zzz_logo.py"]
+        plugins_files = [
+            "bot.py", "change_prefix.py", "help.py", "modules_actions.py",
+            "ping.py", "restart.py", "send_log.py", "~_###_zzz_logo.py"
+        ]
+
         for plugin in tqdm(plugins_files, desc="Update plugins..."):
             new_code = requests.get(
-                f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/plugins/{plugin}").text
-            old_code = open(f"plugins/{plugin}", "w+")
-            if old_code.read() == new_code:
-                pass
-            else:
-                old_code.write(new_code)
-                old_code.close()
+                f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/plugins/{plugin}"
+            ).text
+            plugin_path = f"plugins/{plugin}"
 
-        system_files = ["main.py", "info.py", "helps/get_prefix.py", "helps/modules.py", "help/scripts.py"]
+            with open(plugin_path, "r", encoding="utf-8") as file:
+                old_code = file.read()
+
+            if old_code != new_code:
+                with open(plugin_path, "w", encoding="utf-8") as file:
+                    file.write(new_code)
+
+        system_files = [
+            "main.py", "info.py", "helps/get_prefix.py", "helps/modules.py", "helps/scripts.py"
+        ]
 
         for file in tqdm(system_files, desc="Update system..."):
             new_code = requests.get(f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/{file}").text
-            old_code = open(file, "w+")
-            if old_code.read() == new_code:
-                pass
-            else:
-                old_code.write(new_code)
-                old_code.close()
 
-        print("Update successfully!")
+            with open(file, "r", encoding="utf-8") as old_file:
+                old_code = old_file.read()
+
+            if old_code != new_code:
+                with open(file, "w", encoding="utf-8") as old_file:
+                    old_file.write(new_code)
+
+        print("Обновление успешно!")
         time.sleep(3)
-        cc()
         restart()
 
 
