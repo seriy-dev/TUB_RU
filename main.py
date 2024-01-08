@@ -64,6 +64,7 @@ def download_requirements():
 
 
 def update_userbot():
+    from helps.scripts import restart
     import requests
     from tqdm import tqdm
     print("Поиск обновлений...")
@@ -99,6 +100,7 @@ def update_userbot():
         print("Update successfully!")
         time.sleep(3)
         cc()
+        restart()
 
 
 def logging_setup():
