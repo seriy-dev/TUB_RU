@@ -1,4 +1,3 @@
-import nekobin
 from main import c, conn
 import logging, sys, os
 
