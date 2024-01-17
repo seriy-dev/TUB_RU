@@ -59,7 +59,7 @@ async def show_help(client, message):
             for command_name, help_command in module_commands.items():
                 result = result + f"{command_name} - {help_command}\n"
             file = get_file_by_module(args[1])
-            text_versions = Texts.get_texts(name=args[0], file=file, commands=result)
+            text_versions = Texts.get_texts(name=message.command[1], file=file, commands=result)
             await message.edit(text_versions['module'][lang])
         else:
             text_versions = Texts.get_texts()
