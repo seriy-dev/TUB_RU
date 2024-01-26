@@ -49,6 +49,7 @@ requirements = [
 
 
 def download_requirements():
+    cc()
     print('Please wait...')
     import subprocess
     subprocess.run(['pip', 'install', 'tqdm', '-U', '-q'], check=True)
@@ -76,8 +77,10 @@ def update_userbot():
 
     if ver == info.version:
         print("Обновления не найдены")
+        time.sleep(3)
         return
     else:
+        print("Найдена новая версия!")
         plugins_files = [
             "bot.py", "change_prefix.py", "help.py", "modules_actions.py",
             "ping.py", "restart.py", "send_log.py", "logo.py"
@@ -106,6 +109,7 @@ def update_userbot():
 
         print("Обновление успешно!")
         time.sleep(3)
+        сс()
 
 
 def logging_setup():
