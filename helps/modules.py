@@ -1,3 +1,4 @@
+import logging
 import os
 import requests
 
@@ -49,5 +50,17 @@ def load_module(link):
 def upload_module(module_name: str):
     if module_name in modules:
         return modules[module_name]
+    else:
+        return "Module not found"
+
+
+def remove_module(module_name: str):
+    if module_name in modules:
+        try:
+            os.remove(modules[module_name])
+            return "successfully"
+        except Exception as e:
+            logging.error(e)
+            return "error"
     else:
         return "Module not found"
