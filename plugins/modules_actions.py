@@ -8,6 +8,7 @@ from helps.scripts import get_lang
 prefix = get_prefix()
 lang = get_lang()
 
+
 class Texts_load:
     @staticmethod
     def get_texts():
@@ -29,6 +30,7 @@ class Texts_load:
             }
         }
 
+
 class Texts_upload:
     @staticmethod
     def get_texts():
@@ -47,6 +49,33 @@ class Texts_upload:
             "reload": {
                 "ru": "<b>Перезагружаю юзербота...</b>",
                 "en": "<b>Rebooting the user bot...</b>"
+            }
+        }
+
+
+class Texts_remove:
+    @staticmethod
+    def get_texts():
+        return {
+        "error": {
+            "ru": f"Помощь: {prefix}help modules",
+            "en": f"Help: {prefix}help modules"
+        },
+            "notfound": {
+                "ru": "Модуль не найден",
+                "en": "Module not found"
+            },
+            "successfully": {
+                "ru": " успешно удалён",
+                "en": " successfully removed"
+            },
+            "reload": {
+                "ru": "<b>Перезагружаю юзербота...</b>",
+                "en": "<b>Rebooting the user bot...</b>"
+            },
+            "error2": {
+                "ru": f"Возникла ошибка! Подробнее в логе ({prefix}send_log)",
+                "en": f"An error has occurred! Read more in the log ({prefix}send_log)"
             }
         }
 
@@ -80,18 +109,18 @@ async def lmodule(client, message):
         await message.reply(text_versions["reload"][lang])
         await restart(message=message)
 
+
 @Client.on_message(filters.command(["umodule", "upload_module", "um"], prefix) & filters.me)
 async def uplmodule(client, message):
+    text_versions = Texts_upload.get_texts()
     try:
         name = message.command[1]
     except IndexError:
-        text_versions = Texts_upload.get_texts()
         await message.edit(text_versions['error'][lang])
         return
 
     filename = upload_module(name)
     if filename == "Module not found":
-        text_versions = Texts_upload.get_texts()
         await message.edit(text_versions['notfound'][lang])
 
     module_commands = commands[name]
@@ -103,6 +132,31 @@ async def uplmodule(client, message):
                                caption=f"<b>{name}</b>\n\n{result}")
     await message.delete()
 
+
+@Client.on_message(filters.command(["rmodule", "remove_module", "rm"], prefix) & filters.me)
+async def rmmodule(client, message):
+    text_versions = Texts_remove.get_texts()
+    try:
+        name = message.command[1]
+    except IndexError:
+        await message.edit(text_versions['error'][lang])
+        return
+
+    result = upload_module(name)
+    if result == "Module not found":
+        await message.edit(text_versions['notfound'][lang])
+        return
+
+    elif result == "error":
+        await message.edit(text_versions['error2'][lang])
+        return
+
+    else:
+        await message.edit(name + text_versions['successfully'][lang])
+        await message.reply(text_versions['reload'][lang])
+        await restart(message)
+
+
 if lang == "ru":
     add_module("modules", __file__)
     add_command("modules", f"{prefix}load_module [raw ссылка/в ответ на файл с модулем]", "устанавливает модуль")
@@ -111,6 +165,9 @@ if lang == "ru":
     add_command("modules", f"{prefix}upload_module [имя модуля]", "Отправляет файл модуля в чат")
     add_command("modules", f"{prefix}umodule [имя модуля]", "Отправляет файл модуля в чат")
     add_command("modules", f"{prefix}um [имя модуля]", "Отправляет файл модуля в чат")
+    add_command("modules", f"{prefix}remove_module [имя модуля]", "Удаляет модуль")
+    add_command("modules", f"{prefix}rmodule [имя модуля]", "Удаляет модуль")
+    add_command("modules", f"{prefix}rm [имя модуля]", "Удаляет модуль")
 else:
     add_module("modules", __file__)
     add_command("modules", f"{prefix}load_module [raw link/in response to module file]", "installs a module")
@@ -119,3 +176,6 @@ else:
     add_command("modules", f"{prefix}upload_module [module name]", "sends module file to chat")
     add_command("modules", f"{prefix}umodule [module name]", "sends module file to chat")
     add_command("modules", f"{prefix}um [module name]", "sends module file to chat")
+    add_command("modules", f"{prefix}remove_module [module name]", "Delete the module")
+    add_command("modules", f"{prefix}rmodule [module name]", "Delete the module")
+    add_command("modules", f"{prefix}rm [module name]", "Delete the module")
