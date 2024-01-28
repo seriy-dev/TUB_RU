@@ -37,7 +37,6 @@ def cc():
 
 requirements = [
     "pip",
-    "pycryptodome",
     "termcolor",
     "pyrogram",
     "TgCrypto",
@@ -50,7 +49,7 @@ requirements = [
 
 def download_requirements():
     cc()
-    print('Please wait...')
+    print('Пожалуйста подождите // Please wait...')
     import subprocess
     subprocess.run(['pip', 'install', 'tqdm', '-U', '-q'], check=True)
     from tqdm import tqdm
@@ -69,24 +68,24 @@ def update_userbot():
     from tqdm import tqdm
     import time
     import info
-    
-    print("Поиск обновлений...")
+
+    print("Поиск обновлений... // Searching for updates...")
 
     ver = requests.get("https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/info.py").text
     ver = ver.split('version = "')[1].split('"')[0]
 
-    if ver == info.version:
-        print("Обновления не найдены")
+    if ver <= info.version:
+        print("Обновления не найдены // No updates found")
         time.sleep(3)
         return
     else:
-        print("Найдена новая версия!")
+        print("Найдена новая версия! // New version found!")
         plugins_files = [
             "bot.py", "change_prefix.py", "help.py", "modules_actions.py",
             "ping.py", "restart.py", "send_log.py", "logo.py"
         ]
 
-        for plugin in tqdm(plugins_files, desc="Update plugins..."):
+        for plugin in tqdm(plugins_files, desc="Обновление плагинов... // Updating plugins..."):
             new_code = requests.get(
                 f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/plugins/{plugin}"
             ).text
@@ -100,16 +99,15 @@ def update_userbot():
             "main.py", "info.py", "helps/get_prefix.py", "helps/modules.py", "helps/scripts.py"
         ]
 
-        for file in tqdm(system_files, desc="Update system..."):
+        for file in tqdm(system_files, desc="Обновление системы... // Updating system..."):
             new_code = requests.get(f"https://raw.githubusercontent.com/Timka4959000/TimkaUserBot/main/{file}").text
-            new_code = new_code.replace('\r\n', '\n') 
+            new_code = new_code.replace('\r\n', '\n')
 
             with open(file, "w", encoding="utf-8") as old_file:
                 old_file.write(new_code)
 
-        print("Обновление успешно!")
+        print("Обновление успешно! // Update successful!")
         time.sleep(3)
-        сс()
 
 
 def logging_setup():
