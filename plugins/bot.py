@@ -17,26 +17,34 @@ class Texts:
     def get_texts(me, system, prefix):
         return {"info": {
             "ru": f"""
-<b><emoji id='4999015678238262018'>✨</emoji> | TimkaUserBot  
-👤 | Владелец: {me.mention}
-📁 | Кол-во модулей: {len(modules)}
-💻 | Система: {system}
-❗ | Префикс: {prefix}
-🤖 | Версия юзербота: {version}
-🐍 | Python: {python_version()}
-🥧 | Pyrogram: {__version__}
-👑 | Юзербот создан @fimkov</b>
+<b><emoji id='4999015678238262018'>✨</emoji> | TimkaUserBot</b>
+-----------------------------------
+
+<pre>
+ | Владелец: {me.mention}
+ | Кол-во модулей: {len(modules)}
+ | Система: {system}
+ | Префикс: {prefix}
+ | Версия юзербота: {version}
+ | Python: {python_version()}
+ | Pyrogram: {__version__}
+ | Юзербот создан fimkov
+ </pre>
             """,
             "en": f"""
-<b><emoji id='4999015678238262018'>✨</emoji> | TimkaUserBot  
-👤 | Owner: {me.mention}
-📁 | Number of modules: {len(modules)}
-💻 | System: {system}
-❗ | Prefix: {prefix}
-🤖 | Userbot version: {version}
-🐍 | Python: {python_version()}
-🥧 | Pyrogram: {__version__}
-👑 | Userbot by @fimkov</b>
+<b><emoji id='4999015678238262018'>✨</emoji> | TimkaUserBot</b> 
+-----------------------------------
+
+<pre>
+ | Owner: {me.mention}
+ | Number of modules: {len(modules)}
+ | System: {system}
+ | Prefix: {prefix}
+ | Userbot version: {version}
+ | Python: {python_version()}
+ | Pyrogram: {__version__}
+ | Userbot by fimkov
+ </pre>
             """
         }
         }
