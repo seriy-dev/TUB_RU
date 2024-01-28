@@ -18,7 +18,7 @@ class Texts:
         return {"info": {
             "ru": f"""
 <b><emoji id='4999015678238262018'>✨</emoji> | TimkaUserBot</b>
------------------------------------
+
 
 <pre>
  | Владелец: {me.mention}
@@ -33,7 +33,7 @@ class Texts:
             """,
             "en": f"""
 <b><emoji id='4999015678238262018'>✨</emoji> | TimkaUserBot</b> 
------------------------------------
+
 
 <pre>
  | Owner: {me.mention}
