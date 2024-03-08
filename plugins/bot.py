@@ -7,9 +7,14 @@ from info import version
 from helps.modules import add_module, add_command, modules
 from helps.get_prefix import get_prefix
 from helps.scripts import get_lang
+import psutil
 
 lang = get_lang()
 prefix = get_prefix()
+
+
+def b2mb(b):
+    return round(b / 1024 / 1024, 1)
 
 
 class Texts:
@@ -24,6 +29,7 @@ class Texts:
  | Владелец: {me.mention}
  | Кол-во модулей: {len(modules)}
  | Система: {system}
+ | ОЗУ: {b2mb(psutil.virtual_memory().total - psutil.virtual_memory().available)} / {b2mb(psutil.virtual_memory().total)} ({psutil.virtual_memory().percent})
  | Префикс: {prefix}
  | Версия юзербота: {version}
  | Python: {python_version()}
@@ -39,6 +45,7 @@ class Texts:
  | Owner: {me.mention}
  | Number of modules: {len(modules)}
  | System: {system}
+ | RAM: {b2mb(psutil.virtual_memory().total - psutil.virtual_memory().available)} / {b2mb(psutil.virtual_memory().total)} ({psutil.virtual_memory().percent})
  | Prefix: {prefix}
  | Userbot version: {version}
  | Python: {python_version()}
