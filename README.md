@@ -1,6 +1,6 @@
 <b>Инструкции установки</b>
 
-Установка через termux: <pre language="bash">pkg install git && git clone https://github.com/Timka4959000/TimkaUserBot.git && cd TimkaUserBot && sh termux_setup.sh</pre>
+Установка через termux: <pre language="bash">pkg install git && git clone https://github.com/fimkov/TimkaUserBot.git && cd TimkaUserBot && sh termux_setup.sh</pre>
 Последующие запуски через termux: <pre language="bash">cd TimkaUserBot && sh termux_start.sh</pre>
 
 Актуальная версия Termux: https://github.com/termux/termux-app/releases
@@ -12,7 +12,7 @@ Windows:
 
 <b>Дополнительные модули [official]:</b>
 
-<a href='https://github.com/Timka4959000/TimkaUserBotModules'>репозитор</a>
+<a href='https://github.com/fimkov/TimkaUserBotModules'>репозитор</a>
 
 <a href='https://t.me/TimkaUserBotModules'>телеграм канал</a>
 
