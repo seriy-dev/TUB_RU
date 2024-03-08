@@ -29,7 +29,7 @@ class Texts:
  | Владелец: {me.mention}
  | Кол-во модулей: {len(modules)}
  | Система: {system}
- | ОЗУ: {b2mb(psutil.virtual_memory().total - psutil.virtual_memory().available)} / {b2mb(psutil.virtual_memory().total)} ({psutil.virtual_memory().percent})
+ | ОЗУ: {b2mb(psutil.virtual_memory().total - psutil.virtual_memory().available)} / {b2mb(psutil.virtual_memory().total)} ({psutil.virtual_memory().percent}%)
  | Префикс: {prefix}
  | Версия юзербота: {version}
  | Python: {python_version()}
@@ -45,7 +45,7 @@ class Texts:
  | Owner: {me.mention}
  | Number of modules: {len(modules)}
  | System: {system}
- | RAM: {b2mb(psutil.virtual_memory().total - psutil.virtual_memory().available)} / {b2mb(psutil.virtual_memory().total)} ({psutil.virtual_memory().percent})
+ | RAM: {b2mb(psutil.virtual_memory().total - psutil.virtual_memory().available)} / {b2mb(psutil.virtual_memory().total)} ({psutil.virtual_memory().percent}%)
  | Prefix: {prefix}
  | Userbot version: {version}
  | Python: {python_version()}
