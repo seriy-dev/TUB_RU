@@ -43,7 +43,8 @@ requirements = [
     "requests",
     "gTTS",
     "apscheduler",
-    "colorama"
+    "colorama",
+    "psutil"
 ]
 
 
