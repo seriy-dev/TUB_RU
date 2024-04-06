@@ -38,7 +38,7 @@ def cc():
 requirements = [
     "pip",
     "termcolor",
-    "pyrogram",
+    "pyroru",
     "TgCrypto",
     "requests",
     "gTTS",
@@ -119,8 +119,8 @@ def logging_setup():
 
 def login_client():
     cc()
-    from pyrogram import Client, idle
-    from pyrogram.enums import ParseMode
+    from pyroru import Client, idle
+    from pyroru.enums import ParseMode
     from helps.scripts import get_lang
 
     if not os.path.isfile("restart.txt"):
@@ -152,11 +152,11 @@ def login_client():
             api_hash = input("Enter API Hash: ")
 
         app = Client(
-            name="TimkaUserBot",
+            name="TimkaUserBot (PyroRU)",
             api_hash=api_hash,
             api_id=api_id,
-            device_model="POCO X3 PRO",
-            system_version="ANDROID 13",
+            device_model="TUDUDUN TUDUN",
+            system_version="ANDROID 10000",
             app_version="10.2.9",
             lang_code=lang_code,
             plugins=dict(root="plugins"),
