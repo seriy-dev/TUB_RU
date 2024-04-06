@@ -1,5 +1,5 @@
 from datetime import datetime
-from pyrogram import Client, filters
+from pyroru import Client, filters
 from helps.modules import add_module, add_command
 from helps.scripts import get_lang
 from helps.get_prefix import get_prefix
