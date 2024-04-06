@@ -1,6 +1,6 @@
 <b>Инструкции установки</b>
 
-Установка через termux: <pre language="bash">pkg install git && git clone https://github.com/fimkov/TimkaUserBot.git && cd TimkaUserBot && sh termux_setup.sh</pre>
+Установка через termux: <pre language="bash">pkg install git && git clone https://github.com/seriy-dev/TUB_RU.git && cd TUB_RU && sh termux_setup.sh</pre>
 Последующие запуски через termux: <pre language="bash">cd TimkaUserBot && sh termux_start.sh</pre>
 
 Актуальная версия Termux: https://github.com/termux/termux-app/releases
@@ -18,7 +18,7 @@ Windows:
 
 <b>Пример модуля:</b>
 <pre language='python'>
-from pyrogram import Client, filters
+from pyroru import Client, filters
 from helps.modules import add_module, add_command, modules
 
 from get_prefix import get_prefix
