@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyroru import Client, filters
 from helps.modules import add_module, add_command, load_module, commands, upload_module
 import os
 from helps.get_prefix import get_prefix
