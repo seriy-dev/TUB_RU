@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyroru import Client, filters
 from helps.modules import add_module, add_command
 from helps.scripts import set_key, restart
 from helps.scripts import get_lang
