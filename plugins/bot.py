@@ -1,6 +1,6 @@
 import os
 import subprocess
-from pyrogram import Client, filters, __version__
+from pyroru import Client, filters, __version__
 import platform
 from platform import python_version
 from info import version
@@ -33,7 +33,7 @@ class Texts:
  | Префикс: {prefix}
  | Версия юзербота: {version}
  | Python: {python_version()}
- | Pyrogram: {__version__}
+ | pyroru: {__version__}
  | Юзербот создан fimkov
  </pre>
             """,
@@ -49,7 +49,7 @@ class Texts:
  | Prefix: {prefix}
  | Userbot version: {version}
  | Python: {python_version()}
- | Pyrogram: {__version__}
+ | pyroru: {__version__}
  | Userbot by fimkov
  </pre>
             """
